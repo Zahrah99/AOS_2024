@@ -1,0 +1,30 @@
+Zahrah Limbada (LMBZAH004)
+CTD DATAFRAMA 
+SCDM 
+
+1.	File name: sorted_ctd_data_29_nov_08. csv
+I selected this name because it will tell the reader what data it includes and the date. It also separates it from the original file, which did not have the headers for each column represented. Now, there is no room for confusion when selecting the file to import for analysis.
+
+2.	The added line to the original file included the headers provided by the scientist. That is the date in the 1st, time in the 2nd, depth (m) in the 3rd, temperature (◦C) in the 4th, and salinity (PSU) in the 5th column.  
+
+3.	C:\Users\zahrah\OneDrive\Desktop\MSc\SCDM
+
+4.	import pandas as pd
+
+#import data from the original file
+original_file = "for_nitpicker.csv"
+data = pd.read_csv(original_file, header=None, delim_whitespace=True)
+
+#new dataframe with header and units
+new_header = ["Date", "Time", "Depth (m)", "Temperature (°C)", "Salinity (psu)"]
+new_data = pd.DataFrame(data.values, columns=new_header)
+
+#new dataframe to a new file
+new_file = "sorted_ctd_data_29_nov_08.csv"
+new_data.to_csv(new_file, index=False)
+
+#import using pandas
+imported_data = pd.read_csv(new_file)
+
+#print data
+print(imported_data.head())
