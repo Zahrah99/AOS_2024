@@ -1,0 +1,42 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.style as style
+import matplotlib.dates as mdates
+
+# Adjusted to correct column name from 'TIME_GPS' to 'TIME_SERVER' and removed 'data' from parameters
+df = pd.read_csv('SAA2_WC_2017_metocean_10min_avg.csv', parse_dates=['TIME_SERVER'], index_col='TIME_SERVER', delimiter=',')
+
+# Check for missing values
+missing_values = df.isnull().sum()
+
+# Select data from departure to southernmost location
+start_date = '2017-05-17'
+end_date = '2017-07-04'
+selected_data = df.loc[start_date:end_date]
+
+# Plot time series of air temperature
+style.use('grayscale')
+fig, ax = plt.subplots()
+ax.plot(selected_data.index, selected_data["TSG_TEMP"])
+ax.set_xlabel('Time (Date)')
+ax.set_ylabel('Temperature (°C)')
+plt.xticks(rotation=90)
+fig.autofmt_xdate()
+plt.savefig("air_temperature_timeseries_grayscale.png", dpi=200, bbox_inches='tight')
+
+# Histogram
+fig, ax = plt.subplots()
+ax.hist(selected_data["TSG_SALINITY"], bins=[30.0, 30.5, 31.0, 31.5, 32.0, 32.5, 33.0, 33.5, 34.0, 34.5, 35], color ='blue')
+ax.set_xlabel("Salinity (psu)")
+ax.set_ylabel("Frequency")
+plt.savefig("salinity_histogram.png", dpi=200)
+plt.show()
+
+# scatter plot of wind speed true and air temperature
+fig, ax = plt.subplots()
+sc = ax.scatter(selected_data['WIND_SPEED_TRUE'], selected_data["AIR_TEMPERATURE"], c=selected_data["LATITUDE"], cmap='viridis')
+ax.set_xlabel("Wind Speed (m/s)")
+ax.set_ylabel('Air Temperature (°C)')
+plt.colorbar(sc, label= 'Latitude')
+plt.savefig('wind_speed_true_air_temperature_scatter.png', dpi=200)
+plt.show()

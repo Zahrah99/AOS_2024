@@ -1,0 +1,16 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+data = 'sorted_ctd_data_29_nov_08.csv'
+Sorted_CTDdata = pd.read_csv(data, delimiter = ',')
+fig, ax = plt.subplots(1, 2)
+
+ax[0].plot(Sorted_CTDdata["Temperature (°C)"], Sorted_CTDdata["Depth (m)"], color='blue')
+ax[0].set_xlabel("Temperature (°C)")
+ax[0].set_ylabel("Depth (m)")
+
+ax[1].plot(Sorted_CTDdata["Salinity (psu)" ], Sorted_CTDdata["Depth (m)"], color='red')
+ax[1].set_xlabel("Salinity (psu)")
+
+
+plt.show()
+fig.savefig("share_y.png", dpi=200)
