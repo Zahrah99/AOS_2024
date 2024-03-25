@@ -1,4 +1,0 @@
-File name: sorted_ctd_data_29_nov_08. csv
-I selected this name because it will tell the reader what data it includes and the date. It also separates it from the original file, which did not have the headers for each column represented. Now, there is no room for confusion when selecting the file to import for analysis.
-
-The added line to the original file included the headers provided by the scientist. That is the date in the 1st, time in the 2nd, depth (m) in the 3rd, temperature (◦C) in the 4th, and salinity (PSU) in the 5th column.  
